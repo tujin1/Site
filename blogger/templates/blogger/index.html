@@ -1,0 +1,18 @@
+{% extends 'blogger/base.html' %}
+<head>
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/all_blogs.css">
+    </head>
+{% block content %}
+
+<h3>
+    <ul>
+        {% for blog in blogs %}
+            <li><a href="{% url 'blog_by_id' blog.id %}">{{blog.title}}</a> ({{ blog.num_posts }} posts)</li>
+        {% endfor %}
+    </ul>
+</h3>
+
+{% endblock %}

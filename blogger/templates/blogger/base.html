@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/all_blogs.css">
+    <meta charset="UTF-8">
+    <title>{% block title %}Forum{% endblock %}</title>
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+<p>Welcome, {{ request.user.username }}! <a href="{% url 'logout' %}?next={{ request.path }}">Log out</a> </p>
+{% else %}
+<p>
+    Please <a href="{% url 'login' %}?next={{ request.path }}">log in</a>
+    or <a href="{% url 'signup' %}">sign up</a>
+</p>
+{% endif %}
+<hr/>
+<a href='/blogger/'> Main Page </a>
+{% block content %}{% endblock %}
+
+</body>
+</html>

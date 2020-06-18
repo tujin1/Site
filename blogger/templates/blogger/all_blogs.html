@@ -1,0 +1,24 @@
+<head>
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/all_blogs.css">
+    </head>
+{% extends 'blogger/base.html' %}
+{% block content %}
+<h1>List of all lables:</h1>
+
+<ul>
+    {% for blog in blogs %}
+    <li>
+       <a href = "/blogger/{{blog.id}}/" > {{ blog.title }}</a><i> <br /> Last post {{ blog.updated_at }}</i><br />
+    </li>
+    {% endfor %}
+</ul>
+<form action="{% url 'create_blog' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" maxlength="80" size="80" placeholder="Title" value="{{ title }}"/>
+    <br />
+    <input type="submit" value="Create blog" />
+</form>
+{% endblock %}

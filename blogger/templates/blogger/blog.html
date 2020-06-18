@@ -1,0 +1,40 @@
+{% extends 'blogger/base.html' %}
+<head>
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/all_blogs.css">
+    </head>
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ blog.title }}</h1>
+
+
+<h2>Posts:</h2>
+
+<ul>
+    {% for post in posts %}
+    <li>
+        <p>{{ post.text }}</p><br />
+		<i>{{ post.created_at }} by {{post.username}}</i> {{ post.subject }}
+		<form action="{% url 'delete' post.id %}" method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Delete"/>
+		</form>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<form action="{% url 'create_post' blog.id %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="subject" maxlength="80" size="80" placeholder="Subject" value="{{ subject }}"/>
+    <br />
+    <textarea name="text" maxlength="4096" rows="10" cols="80" placeholder="Post text">{{ text }}</textarea>
+    <br />
+    <input type="submit" value="Create post" />
+</form>
+
+{% endblock %}
